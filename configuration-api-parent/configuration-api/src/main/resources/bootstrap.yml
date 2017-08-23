@@ -1,0 +1,75 @@
+info:
+  app:
+    name: config-api
+    description: Configuration Service
+    version: 1.0.0
+
+server:
+  port: 1111
+  use-forward-headers: true
+  context-path: /config-api
+
+endpoints:
+  restart:
+    enabled: true
+
+spring:
+  application:
+    name: config-api
+  profiles:
+    active: prod
+  thymeleaf:
+    enabled: false
+
+---
+
+spring:
+  profiles: dev
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/BabcockEMTDevelopment/dev-configuration-properties
+logging:
+  config: classpath:logback.xml
+
+---
+
+spring:
+  profiles: test
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/BabcockEMTDevelopment/jf-dev-configuration-properties
+        #native:
+        #  searchLocations: classpath:config
+logging:
+  config: classpath:logback.xml
+
+---
+
+spring:
+  profiles: qa
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/BabcockEMTDevelopment/qa-configuration-properties
+logging:
+  config: classpath:log/logback-qa.xml
+
+---
+
+spring:
+  profiles: prod
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/BabcockEMTDevelopment/prod-configuration-properties
+logging:
+  config: classpath:log/logback-prod.xml
+
+---
+
