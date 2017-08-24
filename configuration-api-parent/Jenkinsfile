@@ -5,18 +5,23 @@ def version
 
 node {
   def img
+  def newVersion
 
   stage('Checkout') {
     checkout scm
+    def pom = readMavenPom file: pomLocation+'/pom.xml'
+    version = pom.version
   }
 
   stage('Build Application') {
     sh 'mvn -B -V -U -e -f '+pomLocation+'/pom.xml clean install'
   }
 
+  stage('Tag Release'){
+    sh "mvn -B -V -U -e -f " + pomLocation + "/pom.xml release:clean release:prepare"
+  }
+
   stage('Package Image') {
-    def pom = readMavenPom file: pomLocation+'/pom.xml'
-    version = pom.version
     img = docker.build(dockerRepoName+':'+version, targetLocation)
   }
 
