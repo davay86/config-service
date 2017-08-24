@@ -17,19 +17,19 @@ spring:
   application:
     name: config-api
   profiles:
-    active: prod
+    active: local,native
   thymeleaf:
     enabled: false
 
 ---
 
 spring:
-  profiles: dev
+  profiles: local
   cloud:
     config:
       server:
-        git:
-          uri: https://github.com/BabcockEMTDevelopment/dev-configuration-properties
+        native:
+         searchLocations: classpath:config
 logging:
   config: classpath:logback.xml
 
@@ -41,9 +41,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/BabcockEMTDevelopment/jf-dev-configuration-properties
-        #native:
-        #  searchLocations: classpath:config
+          uri: https://github.com/BabcockEMTDevelopment/test-configuration-properties
 logging:
   config: classpath:logback.xml
 
@@ -57,7 +55,7 @@ spring:
         git:
           uri: https://github.com/BabcockEMTDevelopment/qa-configuration-properties
 logging:
-  config: classpath:log/logback-qa.xml
+  config: classpath:logback-qa.xml
 
 ---
 
@@ -69,7 +67,7 @@ spring:
         git:
           uri: https://github.com/BabcockEMTDevelopment/prod-configuration-properties
 logging:
-  config: classpath:log/logback-prod.xml
+  config: classpath:logback-prod.xml
 
 ---
 
