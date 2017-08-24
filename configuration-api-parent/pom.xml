@@ -24,7 +24,7 @@
 	</properties>
 
 	<scm>
-		<developerConnection>scm:git:https://github.com/BabcockEMTDevelopment/configuration-server.git</developerConnection>
+		<developerConnection>scm:git:https://github.com/BabcockEMTDevelopment/configuration-api.git</developerConnection>
 	  <tag>HEAD</tag>
   </scm>
 
