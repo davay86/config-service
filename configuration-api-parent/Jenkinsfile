@@ -39,8 +39,8 @@ node {
 
   stage('Remove Local Image') {
        sh 'docker rmi -f registry.hub.docker.com/'+dockerRepoName+':latest'
-       sh 'docker rmi -f registry.hub.docker.com/'+dockerRepoName+':'+version
-       sh 'docker rmi -f '+dockerRepoName+':'+version
+       sh 'docker rmi -f registry.hub.docker.com/'+dockerRepoName+':'+releaseVersion
+       sh 'docker rmi -f '+dockerRepoName+':'+releaseVersion
   }
 
 }
