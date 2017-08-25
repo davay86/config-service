@@ -21,12 +21,12 @@ node {
     version = pom.version
     releaseVersion = version.minus("-SNAPSHOT")
 
-    sh "mvn versions:set -DnewVersion=" + releaseVersion
+    sh "mvn "pomLocation"/pom.xml versions:set -DnewVersion=" + releaseVersion
     sh "mvn -B -V -U -e -f " + pomLocation + "/pom.xml release:clean release:prepare"
 
     pom = readMavenPom file: pomLocation+'/pom.xml'
     newDevVersion = pom.version
-    sh "mvn versions:set -DnewVersion=" + newDevVersion + "-SNAPSHOT"
+    sh "mvn "pomLocation"/pom.xml versions:set -DnewVersion=" + newDevVersion + "-SNAPSHOT"
   }
 
   stage('Package Image') {
