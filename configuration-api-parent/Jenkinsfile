@@ -6,7 +6,6 @@ def version
 node {
   def img
   def releaseVersion
-  def newDevVersion
 
   stage('Checkout') {
     checkout scm
@@ -19,18 +18,16 @@ node {
   stage('Tag Release'){
     def pom = readMavenPom file: pomLocation+'/pom.xml'
     version = pom.version
-    releaseVersion = version.minus("-SNAPSHOT")
+    releaseVersion = version.minus("-SNAPSHOT") + "-RC"
 
-    sh "mvn -f" + pomLocation + "/pom.xml versions:set -DnewVersion=" + releaseVersion + "clean install"
     sh "mvn -B -V -U -e -f " + pomLocation + "/pom.xml release:clean release:prepare"
 
-    pom = readMavenPom file: pomLocation+'/pom.xml'
-    newDevVersion = pom.version
-    sh "mvn -f" + pomLocation + "/pom.xml versions:set -DnewVersion=" + newDevVersion + "-SNAPSHOT"
   }
 
   stage('Package Image') {
-    img = docker.build(dockerRepoName+':'+releaseVersion + '-RC', targetLocation)
+    def pom = readMavenPom file: pomLocation+'/pom.xml'
+    version = pom.version
+    img = docker.build(dockerRepoName+':'+releaseVersion , targetLocation)
   }
 
   stage('Push Image') {
