@@ -21,7 +21,7 @@ node {
     version = pom.version
     releaseVersion = version.minus("-SNAPSHOT")
 
-    sh "mvn -B -V -U -e -f " + pomLocation + "/pom.xml versions:set -DnewVersion=" + releaseVersion release:clean release:prepare"
+    sh "mvn -B -V -U -e -f " + pomLocation + "/pom.xml versions:set -DnewVersion=" + releaseVersion + "release:clean release:prepare"
 
     pom = readMavenPom file: pomLocation+'/pom.xml'
     newDevVersion = pom.version
