@@ -2,7 +2,7 @@ info:
   app:
     name: config-api
     description: Configuration Service
-    version: 1.0.0
+    version: @project.version@
 
 server:
   port: 1111
