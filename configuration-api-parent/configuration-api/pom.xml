@@ -16,6 +16,8 @@
 		<server.jar.name>config-api-${project.parent.version}</server.jar.name>
 		<executable.jar.postfix>exec</executable.jar.postfix>
 		<executable.server.jar.name>${server.jar.name}-${executable.jar.postfix}</executable.server.jar.name>
+
+		<skip.docker.publish>true</skip.docker.publish>
 	</properties>
 
 	<dependencies>
@@ -46,6 +48,15 @@
 		</dependency>
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>docker-publish</id>
+			<properties>
+				<skip.docker.publish>false</skip.docker.publish>
+			</properties>
+		</profile>
+	</profiles>
+
 	<build>
 		<finalName>${server.jar.name}</finalName>
 		<resources>
@@ -60,44 +71,42 @@
 		</resources>
 		<plugins>
 			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.0.0</version>
-				<configuration>
-					<descriptors>
-						<descriptor>src/main/assembly/assembly-config.xml</descriptor>
-					</descriptors>
-				</configuration>
-				<executions>
-					<execution>
-						<id>build-config-api-zip</id>
-						<configuration>
-							<appendAssemblyId>true</appendAssemblyId>
-						</configuration>
-						<phase>verify</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>2.6</version>
 				<executions>
 					<execution>
-						<id>copy-api-start-bat</id>
+						<id>copy-docker-resources</id>
 						<phase>process-resources</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${basedir}/target</outputDirectory>
+							<outputDirectory>${basedir}/target/docker-dist</outputDirectory>
 							<resources>
 								<resource>
 									<directory>${basedir}/target/classes</directory>
 									<includes>
 										<include>Dockerfile</include>
+										<include>.maven-dockerignore</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-springboot-jar</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/docker-dist</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/target</directory>
+									<includes>
+										<include>${executable.server.jar.name}.jar</include>
 									</includes>
 								</resource>
 							</resources>
@@ -116,6 +125,55 @@
 						<configuration>
 							<classifier>${executable.jar.postfix}</classifier>
 						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.21.0</version>
+				<executions>
+					<execution>
+						<id>publish-docker-latest</id>
+						<configuration>
+							<skip>${skip.docker.publish}</skip>
+							<images>
+								<image>
+									<name>sleepingtalent/configuration-api</name>
+									<build>
+										<dockerFileDir>${project.parent.basedir}/configuration-api/target/docker-dist</dockerFileDir>
+									</build>
+								</image>
+							</images>
+							<removeAll>true</removeAll>
+						</configuration>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>build</goal>
+							<goal>push</goal>
+							<goal>remove</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>publish-docker-rc</id>
+						<configuration>
+							<skip>${skip.docker.publish}</skip>
+							<images>
+								<image>
+									<name>sleepingtalent/configuration-api:@{project.version}-RC</name>
+									<build>
+										<dockerFileDir>${project.parent.basedir}/configuration-api/target/docker-dist</dockerFileDir>
+									</build>
+								</image>
+							</images>
+							<removeAll>true</removeAll>
+						</configuration>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>build</goal>
+							<goal>push</goal>
+							<goal>remove</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>
