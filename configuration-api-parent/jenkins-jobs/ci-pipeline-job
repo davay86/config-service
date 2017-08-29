@@ -23,7 +23,7 @@ node {
   }
 
   stage('Publish Image') {
-      sh 'mvn -B -V -U -e -f '+pomLocation+'/pom.xml clean install -Pdocker-publish'
+      sh 'mvn -B -V -U -e -f '+pomLocation+'/pom.xml clean install -Pdocker-publish -Ddocker.release.version='+releaseVersion
   }
 
 }

@@ -18,6 +18,7 @@
 		<executable.server.jar.name>${server.jar.name}-${executable.jar.postfix}</executable.server.jar.name>
 
 		<skip.docker.publish>true</skip.docker.publish>
+		<docker.release.version>change-me-rc</docker.release.version>
 	</properties>
 
 	<dependencies>
@@ -160,7 +161,7 @@
 							<skip>${skip.docker.publish}</skip>
 							<images>
 								<image>
-									<name>sleepingtalent/configuration-api:%v-RC</name>
+									<name>sleepingtalent/configuration-api:${docker.release.version}</name>
 									<build>
 										<dockerFileDir>${project.parent.basedir}/configuration-api/target/docker-dist</dockerFileDir>
 									</build>
