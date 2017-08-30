@@ -18,7 +18,7 @@
 		<executable.server.jar.name>${server.jar.name}-${executable.jar.postfix}</executable.server.jar.name>
 
 		<skip.docker.publish>true</skip.docker.publish>
-		<docker.release.version>change-me</docker.release.version>
+		<docker.release.version>${project.version}</docker.release.version>
 	</properties>
 
 	<dependencies>
