@@ -18,7 +18,7 @@ spec:
         spec:
             containers:
             - name: config-api
-              image: sleepingtalent/configuration-api:change-me-rc
+              image: sleepingtalent/configuration-api:change-me
               env:
               - name: GIT_CONFIG_URL
                 value: https://github.com/BabcockEMTDevelopment/prod-configuration-properties
