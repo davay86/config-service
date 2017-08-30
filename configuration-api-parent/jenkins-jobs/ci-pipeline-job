@@ -1,23 +1,13 @@
 def pomLocation = "configuration-api-parent"
-def version
 
 node {
   def img
-  def releaseVersion
 
   stage('Checkout') {
     checkout scm
   }
 
-  stage('Build Application') {
-    sh 'mvn -B -V -U -e -f '+pomLocation+'/pom.xml clean install'
-  }
-
-  stage('Release Jar and Image'){
-    def pom = readMavenPom file: pomLocation+'/pom.xml'
-    version = pom.version
-    releaseVersion = version.minus("-SNAPSHOT") + "-RC"
-
+  stage('Build and Release'){
     sh "mvn -B -V -U -e -f " + pomLocation + "/pom.xml release:clean release:prepare -Pdocker-publish"
   }
 
