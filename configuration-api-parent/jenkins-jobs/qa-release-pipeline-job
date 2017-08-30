@@ -1,6 +1,7 @@
 node{
     stage('Release to QA'){
-        //kubectl script to push to kubernetes environment.
+        sh "kubectl config use-context aws_QA"
+        sh "kubectl rolling-update config-api [config-api] --image=sleepingtalent/configuration-api:latest"
     }
 
     stage('Verify QA'){
