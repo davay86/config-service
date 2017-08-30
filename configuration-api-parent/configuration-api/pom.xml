@@ -96,6 +96,24 @@
 						</configuration>
 					</execution>
 					<execution>
+						<id>copy-kubernetes-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/target/classes</directory>
+									<includes>
+										<include>kubernetes/*.*</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
 						<id>copy-springboot-jar</id>
 						<phase>pre-integration-test</phase>
 						<goals>
