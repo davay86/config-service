@@ -24,5 +24,6 @@ spec:
                 value: https://github.com/BabcockEMTDevelopment/qa-configuration-properties
               ports:
               - containerPort: 1111
+            imagePullPolicy: Always
 
 
