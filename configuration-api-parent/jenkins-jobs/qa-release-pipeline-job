@@ -1,6 +1,6 @@
 node{
     stage('Release to QA'){
-        sh "kubectl rolling-update config-api [config-api] --image=sleepingtalent/configuration-api:latest"
+        sh "kubectl set image deployment config-api config-api=sleepingtalent/configuration-api:latest --record"
     }
 
     stage('Verify QA'){
