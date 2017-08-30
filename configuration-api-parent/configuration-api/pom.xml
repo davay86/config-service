@@ -161,7 +161,7 @@
 							<skip>${skip.docker.publish}</skip>
 							<images>
 								<image>
-									<name>sleepingtalent/configuration-api:${docker.release.version}</name>
+									<name>sleepingtalent/configuration-api:${project.version}-RC</name>
 									<build>
 										<dockerFileDir>${project.parent.basedir}/configuration-api/target/docker-dist</dockerFileDir>
 									</build>
