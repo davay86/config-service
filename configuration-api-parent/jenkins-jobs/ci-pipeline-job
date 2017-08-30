@@ -13,17 +13,13 @@ node {
     sh 'mvn -B -V -U -e -f '+pomLocation+'/pom.xml clean install'
   }
 
-  stage('Tag Release'){
+  stage('Release Jar and Image'){
     def pom = readMavenPom file: pomLocation+'/pom.xml'
     version = pom.version
     releaseVersion = version.minus("-SNAPSHOT") + "-RC"
 
-    sh "mvn -B -V -U -e -f " + pomLocation + "/pom.xml release:clean release:prepare"
+    sh "mvn -B -V -U -e -f " + pomLocation + "/pom.xml release:clean release:prepare -Pdocker-publish -Ddocker.release.version='+releaseVersion
 
-  }
-
-  stage('Publish Image') {
-      sh 'mvn -B -V -U -e -f '+pomLocation+'/pom.xml clean install -Pdocker-publish -Ddocker.release.version='+releaseVersion
   }
 
 }

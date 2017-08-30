@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata: 
+    name: config-api
+spec:
+    replicas: 1
+    template:
+        metadata:
+            labels:
+              app: config-api
+              tier: configuration
+        spec:
+            containers:
+            - name: config-api
+              image: sleepingtalent/configuration-api:latest
+              env:
+              - name: GIT_CONFIG_URL
+                value: https://github.com/BabcockEMTDevelopment/qa-configuration-properties
+              ports:
+              - containerPort: 1111
+
+
