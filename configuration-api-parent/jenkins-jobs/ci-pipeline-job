@@ -13,6 +13,9 @@ node {
      releaseVersion = version.minus("-SNAPSHOT")
 
     sh "mvn -B -V -U -e -f " + pomLocation + "/pom.xml release:clean release:prepare -Pdocker-publish -Ddocker.release.version="+releaseVersion
+
+    sh "git commit -am "Commiting yaml files"
+    sh "git push"
   }
 
 }
