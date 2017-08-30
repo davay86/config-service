@@ -208,7 +208,7 @@
 				<executions>
 					<execution>
 						<id>commit-kubernetes-config</id>
-						<phase>install</phase>
+						<phase>pre-integration-test</phase>
 						<goals>
 							<goal>checkin</goal>
 						</goals>
