@@ -1,6 +1,5 @@
 node{
     stage('Release to QA'){
-        sh "kubectl config use-context aws_QA"
         sh "kubectl rolling-update config-api [config-api] --image=sleepingtalent/configuration-api:latest"
     }
 
