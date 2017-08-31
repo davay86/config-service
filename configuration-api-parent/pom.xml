@@ -25,8 +25,40 @@
 
 	<scm>
 		<developerConnection>scm:git:https://github.com/BabcockEMTDevelopment/configuration-api.git</developerConnection>
-	  <tag>HEAD</tag>
+	  	<tag>HEAD</tag>
   </scm>
+
+	<profiles>
+		<profile>
+			<id>docker-publish</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-scm-plugin</artifactId>
+						<version>1.9.5</version>
+						<configuration>
+							<connectionType>developerConnection</connectionType>
+						</configuration>
+						<executions>
+							<execution>
+								<configuration>
+									<pushChanges>true</pushChanges>
+									<message>updating kubernetes config</message>
+								</configuration>
+								<id>commit-kubernetes-config</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>checkin</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 
 	<build>
 		<plugins>
