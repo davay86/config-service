@@ -55,6 +55,81 @@
 			<properties>
 				<skip.docker.publish>false</skip.docker.publish>
 			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.fabric8</groupId>
+						<artifactId>docker-maven-plugin</artifactId>
+						<version>0.21.0</version>
+						<executions>
+							<execution>
+								<id>publish-docker-latest</id>
+								<configuration>
+									<skip>${skip.docker.publish}</skip>
+									<images>
+										<image>
+											<name>sleepingtalent/configuration-api</name>
+											<build>
+												<dockerFileDir>${project.parent.basedir}/configuration-api/target/docker-dist</dockerFileDir>
+											</build>
+										</image>
+									</images>
+									<removeAll>true</removeAll>
+								</configuration>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>build</goal>
+									<goal>push</goal>
+									<goal>remove</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>publish-docker-rc</id>
+								<configuration>
+									<skip>${skip.docker.publish}</skip>
+									<images>
+										<image>
+											<name>sleepingtalent/configuration-api:${project.version}-RC</name>
+											<build>
+												<dockerFileDir>${project.parent.basedir}/configuration-api/target/docker-dist</dockerFileDir>
+											</build>
+										</image>
+									</images>
+									<removeAll>true</removeAll>
+								</configuration>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>build</goal>
+									<goal>push</goal>
+									<goal>remove</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-scm-plugin</artifactId>
+						<version>1.9.5</version>
+						<configuration>
+							<skip>${skip.docker.publish}</skip>
+							<connectionType>developerConnection</connectionType>
+						</configuration>
+						<executions>
+							<execution>
+								<configuration>
+									<pushChanges>true</pushChanges>
+									<message>updating kubernetes config</message>
+								</configuration>
+								<id>commit-kubernetes-config</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>checkin</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 
@@ -168,77 +243,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>io.fabric8</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.21.0</version>
-				<executions>
-					<execution>
-						<id>publish-docker-latest</id>
-						<configuration>
-							<skip>${skip.docker.publish}</skip>
-							<images>
-								<image>
-									<name>sleepingtalent/configuration-api</name>
-									<build>
-										<dockerFileDir>${project.parent.basedir}/configuration-api/target/docker-dist</dockerFileDir>
-									</build>
-								</image>
-							</images>
-							<removeAll>true</removeAll>
-						</configuration>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>build</goal>
-							<goal>push</goal>
-							<goal>remove</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>publish-docker-rc</id>
-						<configuration>
-							<skip>${skip.docker.publish}</skip>
-							<images>
-								<image>
-									<name>sleepingtalent/configuration-api:${project.version}-RC</name>
-									<build>
-										<dockerFileDir>${project.parent.basedir}/configuration-api/target/docker-dist</dockerFileDir>
-									</build>
-								</image>
-							</images>
-							<removeAll>true</removeAll>
-						</configuration>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>build</goal>
-							<goal>push</goal>
-							<goal>remove</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-scm-plugin</artifactId>
-				<version>1.9.5</version>
-				<configuration>
-					<skip>${skip.docker.publish}</skip>
-					<connectionType>developerConnection</connectionType>
-				</configuration>
-				<executions>
-					<execution>
-						<configuration>
-							<pushChanges>true</pushChanges>
-							<message>updating kubernetes config</message>
-						</configuration>
-						<id>commit-kubernetes-config</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>checkin</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+
 		</plugins>
 	</build>
 </project>
