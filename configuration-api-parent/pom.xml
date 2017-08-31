@@ -21,6 +21,8 @@
 		<spring-cloud.version>Brixton.RELEASE</spring-cloud.version>
 		<java.version>1.8</java.version>
 		<project.scm.id>github.com</project.scm.id>
+
+		<scm.plugin.version>1.9.5</scm.plugin.version>
 	</properties>
 
 	<scm>
@@ -37,21 +39,20 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-scm-plugin</artifactId>
-						<version>1.9.5</version>
+						<version>${scm.plugin.version}</version>
 						<configuration>
 							<connectionType>connection</connectionType>
 						</configuration>
 						<executions>
 							<execution>
+								<id>default-cli</id>
 								<configuration>
-									<pushChanges>true</pushChanges>
-									<message>updating kubernetes config</message>
+									<!--<pushChanges>true</pushChanges>-->
+									<message>[committing kubernetes config]</message>
 									<includes>
 										${basedir}/configuration-api/kubernetes/*
 									</includes>
 								</configuration>
-								<id>commit-kubernetes-config</id>
-								<phase>pre-integration-test</phase>
 								<goals>
 									<goal>checkin</goal>
 								</goals>
@@ -63,7 +64,6 @@
 		</profile>
 	</profiles>
 
-
 	<build>
 		<plugins>
 			<plugin>
@@ -72,6 +72,9 @@
 				<version>2.5.3</version>
 				<configuration>
 					<tagNameFormat>@{project.version}-RC</tagNameFormat>
+					<preparationGoals>
+						org.apache.maven.plugins:maven-scm-plugin:${scm.plugin.version:checkin
+					</preparationGoals>
 				</configuration>
 			</plugin>
 
