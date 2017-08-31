@@ -62,7 +62,6 @@
 							<execution>
 								<id>publish-docker-rc</id>
 								<configuration>
-									<skip>${skip.docker.publish}</skip>
 									<images>
 										<image>
 											<name>sleepingtalent/configuration-api:${project.version}-RC</name>
@@ -78,27 +77,6 @@
 									<goal>build</goal>
 									<goal>push</goal>
 									<goal>remove</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-scm-plugin</artifactId>
-						<version>1.9.5</version>
-						<configuration>
-							<connectionType>developerConnection</connectionType>
-						</configuration>
-						<executions>
-							<execution>
-								<configuration>
-									<pushChanges>true</pushChanges>
-									<message>updating kubernetes config</message>
-								</configuration>
-								<id>commit-kubernetes-config</id>
-								<phase>pre-integration-test</phase>
-								<goals>
-									<goal>checkin</goal>
 								</goals>
 							</execution>
 						</executions>
