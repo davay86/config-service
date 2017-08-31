@@ -16,6 +16,7 @@
 		<server.jar.name>config-api-${project.parent.version}</server.jar.name>
 		<executable.jar.postfix>exec</executable.jar.postfix>
 		<executable.server.jar.name>${server.jar.name}-${executable.jar.postfix}</executable.server.jar.name>
+		<docker.release.version>${project.version}</docker.release.version>
 	</properties>
 
 	<dependencies>
