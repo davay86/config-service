@@ -9,7 +9,7 @@
 
 	<groupId>com.babcock.server</groupId>
 	<artifactId>configuration-api-parent</artifactId>
-	<version>1.0.63-SNAPSHOT</version>
+	<version>1.0.64-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 
