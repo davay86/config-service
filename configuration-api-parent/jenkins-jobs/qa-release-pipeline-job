@@ -1,6 +1,11 @@
 node{
+
+    stage('Checkout') {
+        checkout scm
+    }
+
     stage('Release to QA'){
-        sh "kubectl set image deployment config-api config-api=sleepingtalent/configuration-api:latest --record"
+        sh "kubectl replace -f configuration-api-parent/configuration-api/kubernetes/config-api-qa-deployment.yml --record"
     }
 
     stage('Verify QA'){
