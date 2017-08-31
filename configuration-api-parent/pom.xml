@@ -50,9 +50,8 @@
 								<configuration>
 									<!--<pushChanges>true</pushChanges>-->
 									<message>[committing-kubernetes-config]</message>
-									<includes>
-										${basedir}/configuration-api/kubernetes/*
-									</includes>
+									<includes>**/kubernetes/**</includes>
+									<excludes>**/target/**</excludes>
 								</configuration>
 								<goals>
 									<goal>checkin</goal>
