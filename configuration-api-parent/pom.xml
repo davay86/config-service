@@ -32,17 +32,6 @@
 	  	<tag>HEAD</tag>
   	</scm>
 
-	<!--<profiles>-->
-		<!--<profile>-->
-			<!--<id>docker-publish</id>-->
-			<!--<build>-->
-				<!--<plugins>-->
-
-				<!--</plugins>-->
-			<!--</build>-->
-		<!--</profile>-->
-	<!--</profiles>-->
-
 	<build>
 		<plugins>
 			<plugin>

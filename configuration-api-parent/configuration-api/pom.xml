@@ -52,37 +52,9 @@
 	<profiles>
 		<profile>
 			<id>docker-publish</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>io.fabric8</groupId>
-						<artifactId>docker-maven-plugin</artifactId>
-						<version>0.21.0</version>
-						<executions>
-							<execution>
-								<id>publish-docker-rc</id>
-								<configuration>
-									<images>
-										<image>
-											<name>sleepingtalent/configuration-api:${project.version}-RC</name>
-											<build>
-												<dockerFileDir>${project.parent.basedir}/configuration-api/target/docker-dist</dockerFileDir>
-											</build>
-										</image>
-									</images>
-									<removeAll>true</removeAll>
-								</configuration>
-								<phase>pre-integration-test</phase>
-								<goals>
-									<goal>build</goal>
-									<goal>push</goal>
-									<goal>remove</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
+			<properties>
+				<skip.docker.publish>false</skip.docker.publish>
+			</properties>
 		</profile>
 	</profiles>
 
@@ -193,6 +165,34 @@
 						<configuration>
 							<classifier>${executable.jar.postfix}</classifier>
 						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.21.0</version>
+				<executions>
+					<execution>
+						<id>publish-docker-rc</id>
+						<configuration>
+							<skip>${skip.docker.publish}</skip>
+							<images>
+								<image>
+									<name>sleepingtalent/configuration-api:${project.version}-RC</name>
+									<build>
+										<dockerFileDir>${project.parent.basedir}/configuration-api/target/docker-dist</dockerFileDir>
+									</build>
+								</image>
+							</images>
+							<removeAll>true</removeAll>
+						</configuration>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>build</goal>
+							<goal>push</goal>
+							<goal>remove</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>
