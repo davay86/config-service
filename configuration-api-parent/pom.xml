@@ -51,7 +51,7 @@
 									<!--<pushChanges>true</pushChanges>-->
 									<message>[maven-release-plugin] committing-kubernetes-config</message>
 									<includes>**/kubernetes/**</includes>
-									<excludes>**/target/**</excludes>
+									<excludes>**/target/**,**/resources/**</excludes>
 								</configuration>
 								<goals>
 									<goal>checkin</goal>
