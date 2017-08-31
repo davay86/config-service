@@ -52,9 +52,6 @@
 	<profiles>
 		<profile>
 			<id>docker-publish</id>
-			<properties>
-				<skip.docker.publish>false</skip.docker.publish>
-			</properties>
 			<build>
 				<plugins>
 					<plugin>
@@ -62,27 +59,6 @@
 						<artifactId>docker-maven-plugin</artifactId>
 						<version>0.21.0</version>
 						<executions>
-							<execution>
-								<id>publish-docker-latest</id>
-								<configuration>
-									<skip>${skip.docker.publish}</skip>
-									<images>
-										<image>
-											<name>sleepingtalent/configuration-api</name>
-											<build>
-												<dockerFileDir>${project.parent.basedir}/configuration-api/target/docker-dist</dockerFileDir>
-											</build>
-										</image>
-									</images>
-									<removeAll>true</removeAll>
-								</configuration>
-								<phase>pre-integration-test</phase>
-								<goals>
-									<goal>build</goal>
-									<goal>push</goal>
-									<goal>remove</goal>
-								</goals>
-							</execution>
 							<execution>
 								<id>publish-docker-rc</id>
 								<configuration>
@@ -111,7 +87,6 @@
 						<artifactId>maven-scm-plugin</artifactId>
 						<version>1.9.5</version>
 						<configuration>
-							<skip>${skip.docker.publish}</skip>
 							<connectionType>developerConnection</connectionType>
 						</configuration>
 						<executions>
