@@ -9,7 +9,7 @@
 
 	<groupId>com.babcock.server</groupId>
 	<artifactId>configuration-api-parent</artifactId>
-	<version>1.0.49</version>
+	<version>1.0.50-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 
@@ -26,7 +26,7 @@
 	<scm>
 		<developerConnection>scm:git:https://github.com/BabcockEMTDevelopment/configuration-api.git</developerConnection>
 		<connection>scm:git:https://github.com/BabcockEMTDevelopment/configuration-api.git</connection>
-	  	<tag>1.0.49-RC</tag>
+	  	<tag>HEAD</tag>
   </scm>
 
 	<profiles>
@@ -46,6 +46,9 @@
 								<configuration>
 									<pushChanges>true</pushChanges>
 									<message>updating kubernetes config</message>
+									<includes>
+										<include>${basedir}/configuration-api/kubernetes/*</include>
+									</includes>
 								</configuration>
 								<id>commit-kubernetes-config</id>
 								<phase>pre-integration-test</phase>
