@@ -48,7 +48,7 @@
 							<execution>
 								<id>default-cli</id>
 								<configuration>
-									<!--<pushChanges>true</pushChanges>-->
+									<pushChanges>true</pushChanges>
 									<message>[maven-release-plugin] committing-kubernetes-config</message>
 									<includes>**/kubernetes/**,**/pom.xml</includes>
 									<excludes>**/target/**,**/resources/**</excludes>
