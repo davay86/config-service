@@ -9,7 +9,7 @@
 
 	<groupId>com.babcock.server</groupId>
 	<artifactId>configuration-api-parent</artifactId>
-	<version>1.0.70</version>
+	<version>1.0.71-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 
@@ -29,7 +29,7 @@
 		<url>https://github.com/BabcockEMTDevelopment/configuration-api</url>
 		<developerConnection>scm:git:https://github.com/BabcockEMTDevelopment/configuration-api.git</developerConnection>
 		<connection>scm:git:https://github.com/BabcockEMTDevelopment/configuration-api.git</connection>
-	  	<tag>1.0.70-RC</tag>
+	  	<tag>HEAD</tag>
   	</scm>
 
 	<build>
