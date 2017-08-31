@@ -4,11 +4,11 @@
 	<parent>
 		<groupId>com.babcock.server</groupId>
 		<artifactId>configuration-api-parent</artifactId>
-		<version>1.0.65-SNAPSHOT</version>
+		<version>1.0.67-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>configuration-api</artifactId>
-	<version>1.0.65-SNAPSHOT</version>
+	<version>1.0.67-SNAPSHOT</version>
 	
 	<packaging>jar</packaging>
 
@@ -16,9 +16,6 @@
 		<server.jar.name>config-api-${project.parent.version}</server.jar.name>
 		<executable.jar.postfix>exec</executable.jar.postfix>
 		<executable.server.jar.name>${server.jar.name}-${executable.jar.postfix}</executable.server.jar.name>
-
-		<skip.docker.publish>true</skip.docker.publish>
-		<docker.release.version>${project.version}</docker.release.version>
 	</properties>
 
 	<dependencies>
@@ -52,9 +49,37 @@
 	<profiles>
 		<profile>
 			<id>docker-publish</id>
-			<properties>
-				<skip.docker.publish>false</skip.docker.publish>
-			</properties>
+			<build>
+				<plugins>
+					<plugin>
+					<groupId>io.fabric8</groupId>
+					<artifactId>docker-maven-plugin</artifactId>
+					<version>0.21.0</version>
+					<executions>
+						<execution>
+							<id>publish-docker-rc</id>
+							<configuration>
+								<images>
+									<image>
+										<name>sleepingtalent/configuration-api:${project.version}-RC</name>
+										<build>
+											<dockerFileDir>${project.parent.basedir}/configuration-api/target/docker-dist</dockerFileDir>
+										</build>
+									</image>
+								</images>
+								<removeAll>true</removeAll>
+							</configuration>
+							<phase>pre-integration-test</phase>
+							<goals>
+								<goal>build</goal>
+								<goal>push</goal>
+								<goal>remove</goal>
+							</goals>
+						</execution>
+					</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 
@@ -71,27 +96,6 @@
 			</resource>
 		</resources>
 		<plugins>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.0.0</version>
-				<configuration>
-					<descriptors>
-						<descriptor>src/main/assembly/assembly-config.xml</descriptor>
-					</descriptors>
-				</configuration>
-				<executions>
-					<execution>
-						<id>build-kubernetes-docker-zip</id>
-						<configuration>
-							<appendAssemblyId>true</appendAssemblyId>
-						</configuration>
-						<phase>verify</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -165,34 +169,6 @@
 						<configuration>
 							<classifier>${executable.jar.postfix}</classifier>
 						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>io.fabric8</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.21.0</version>
-				<executions>
-					<execution>
-						<id>publish-docker-rc</id>
-						<configuration>
-							<skip>${skip.docker.publish}</skip>
-							<images>
-								<image>
-									<name>sleepingtalent/configuration-api:${project.version}-RC</name>
-									<build>
-										<dockerFileDir>${project.parent.basedir}/configuration-api/target/docker-dist</dockerFileDir>
-									</build>
-								</image>
-							</images>
-							<removeAll>true</removeAll>
-						</configuration>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>build</goal>
-							<goal>push</goal>
-							<goal>remove</goal>
-						</goals>
 					</execution>
 				</executions>
 			</plugin>
