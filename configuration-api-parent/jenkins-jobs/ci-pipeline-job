@@ -1,7 +1,6 @@
 def pomLocation = "configuration-api-parent"
 
 node {
-  def img
 
   stage('Checkout') {
     checkout scm
