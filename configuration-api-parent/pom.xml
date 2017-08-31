@@ -27,7 +27,7 @@
 		<developerConnection>scm:git:https://github.com/BabcockEMTDevelopment/configuration-api.git</developerConnection>
 		<connection>scm:git:https://github.com/BabcockEMTDevelopment/configuration-api.git</connection>
 	  	<tag>HEAD</tag>
-  </scm>
+  	</scm>
 
 	<profiles>
 		<profile>
@@ -47,7 +47,7 @@
 									<pushChanges>true</pushChanges>
 									<message>updating kubernetes config</message>
 									<includes>
-										<include>${basedir}/configuration-api/kubernetes/*</include>
+										${basedir}/configuration-api/kubernetes/*
 									</includes>
 								</configuration>
 								<id>commit-kubernetes-config</id>
