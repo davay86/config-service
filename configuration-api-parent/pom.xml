@@ -40,9 +40,9 @@
 				<version>2.5.3</version>
 				<configuration>
 					<tagNameFormat>@{project.version}-RC</tagNameFormat>
-					<preparationGoals>
-						org.apache.maven.plugins:maven-scm-plugin:${scm.plugin.version}:checkin
-					</preparationGoals>
+					<!--<preparationGoals>-->
+						<!--org.apache.maven.plugins:maven-scm-plugin:${scm.plugin.version}:checkin-->
+					<!--</preparationGoals>-->
 				</configuration>
 			</plugin>
 			<plugin>
