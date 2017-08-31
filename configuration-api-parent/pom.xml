@@ -50,7 +50,7 @@
 								<configuration>
 									<!--<pushChanges>true</pushChanges>-->
 									<message>[maven-release-plugin] committing-kubernetes-config</message>
-									<includes>**/kubernetes/**</includes>
+									<includes>**/kubernetes/**, **/pom.xml</includes>
 									<excludes>**/target/**,**/resources/**</excludes>
 								</configuration>
 								<goals>
