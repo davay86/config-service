@@ -49,7 +49,7 @@
 								<id>default-cli</id>
 								<configuration>
 									<!--<pushChanges>true</pushChanges>-->
-									<message>[committing-kubernetes-config]</message>
+									<message>[maven-release-plugin] committing-kubernetes-config</message>
 									<includes>**/kubernetes/**</includes>
 									<excludes>**/target/**</excludes>
 								</configuration>
