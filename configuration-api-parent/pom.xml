@@ -46,6 +46,9 @@
 								<configuration>
 									<pushChanges>true</pushChanges>
 									<message>updating kubernetes config</message>
+									<includes>
+										<include>${basedir}/configuration-api/kubernetes/*</include>
+									</includes>
 								</configuration>
 								<id>commit-kubernetes-config</id>
 								<phase>pre-integration-test</phase>
