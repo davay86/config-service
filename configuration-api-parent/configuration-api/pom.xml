@@ -16,9 +16,6 @@
 		<server.jar.name>config-api-${project.parent.version}</server.jar.name>
 		<executable.jar.postfix>exec</executable.jar.postfix>
 		<executable.server.jar.name>${server.jar.name}-${executable.jar.postfix}</executable.server.jar.name>
-
-		<skip.docker.publish>true</skip.docker.publish>
-		<docker.release.version>${project.version}</docker.release.version>
 	</properties>
 
 	<dependencies>
@@ -62,7 +59,6 @@
 						<execution>
 							<id>publish-docker-rc</id>
 							<configuration>
-								<skip>${skip.docker.publish}</skip>
 								<images>
 									<image>
 										<name>sleepingtalent/configuration-api:${project.version}-RC</name>
@@ -100,27 +96,6 @@
 			</resource>
 		</resources>
 		<plugins>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.0.0</version>
-				<configuration>
-					<descriptors>
-						<descriptor>src/main/assembly/assembly-config.xml</descriptor>
-					</descriptors>
-				</configuration>
-				<executions>
-					<execution>
-						<id>build-kubernetes-docker-zip</id>
-						<configuration>
-							<appendAssemblyId>true</appendAssemblyId>
-						</configuration>
-						<phase>verify</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
