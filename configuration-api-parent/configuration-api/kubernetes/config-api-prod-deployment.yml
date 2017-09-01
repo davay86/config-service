@@ -18,12 +18,11 @@ spec:
         spec:
             containers:
             - name: config-api
-              image: sleepingtalent/configuration-api:1.0.76
+              image: sleepingtalent/configuration-api:1.0.77
               env:
               - name: GIT_CONFIG_URL
                 value: https://github.com/BabcockEMTDevelopment/prod-configuration-properties
               ports:
               - containerPort: 1111
-            imagePullPolicy: Always
 
 
