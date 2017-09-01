@@ -24,6 +24,5 @@ spec:
                 value: https://github.com/BabcockEMTDevelopment/prod-configuration-properties
               ports:
               - containerPort: 1111
-            imagePullPolicy: Always
 
 
