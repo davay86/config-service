@@ -19,8 +19,9 @@ node {
             img.push(release)
         }
 
+        sh 'docker rmi -f registry.hub.docker.com/'+dockerRepoName+':'+release
+        sh 'docker rmi -f registry.hub.docker.com/'+dockerRepoName+':'+releaseCandidate
         sh 'docker rmi -f '+dockerRepoName+':'+releaseCandidate
-        sh 'docker rmi -f '+dockerRepoName+':'+release
     }
 
     stage('Release to Prod'){
