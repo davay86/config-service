@@ -1,0 +1,12 @@
+def release-candidate = ${release-candidate-version}
+
+node{
+
+    stage('Checkout') {
+        checkout scm
+    }
+
+    stage('Release to Prod'){
+        'sh echo '+release-candidate
+    }
+}
