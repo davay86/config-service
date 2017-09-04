@@ -1,4 +1,4 @@
-def release-candidate = ${release-candidate-version}
+def release-candidate = "${release-candidate-version}"
 
 node{
 
