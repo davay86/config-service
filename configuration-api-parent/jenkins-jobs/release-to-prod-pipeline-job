@@ -13,6 +13,8 @@ node {
 
         def img = docker.image(dockerRepoName+":"+releaseCandidate)
 
+        img.pull()
+
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
             img.push(release)
         }
