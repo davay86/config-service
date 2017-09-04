@@ -1,4 +1,4 @@
-def releaseCandidate = "${release-candidate-version}"
+def releaseCandidate = params.release-candidate-version
 
 node{
 
