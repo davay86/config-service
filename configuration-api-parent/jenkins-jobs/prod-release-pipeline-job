@@ -1,12 +1,12 @@
-def releaseCandidate = params.release-candidate-version
+def releaseCandidate = params.RELEASE_CANDIDATE
 
-node{
+node {
 
     stage('Checkout') {
         checkout scm
     }
 
     stage('Release to Prod'){
-        'sh echo '+releaseCandidate
+        'sh echo '+${releaseCandidate}
     }
 }
