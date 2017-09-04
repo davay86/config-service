@@ -1,4 +1,4 @@
-def release-candidate = "${release-candidate-version}"
+def releaseCandidate = "${release-candidate-version}"
 
 node{
 
@@ -7,6 +7,6 @@ node{
     }
 
     stage('Release to Prod'){
-        'sh echo '+release-candidate
+        'sh echo '+releaseCandidate
     }
 }
