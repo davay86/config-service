@@ -7,6 +7,6 @@ node {
     }
 
     stage('Release to Prod'){
-        'sh echo '+releaseCandidate
+        sh "echo ""+releaseCandidate
     }
 }
