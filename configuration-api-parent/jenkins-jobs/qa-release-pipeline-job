@@ -5,8 +5,8 @@ node{
     }
 
     stage('Update Jira issue'){
-        def transitionInput = [transition: [name: 'Done']]
-        jiraTransitionIssue idOrKey: 41, input:transitionInput, site: 'Jira'
+        def transitionInput = [transition: 41]
+        jiraTransitionIssue idOrKey: 'VB-1', input:transitionInput, site: 'Jira'
     }
 
 
