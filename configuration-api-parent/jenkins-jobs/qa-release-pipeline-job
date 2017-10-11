@@ -4,14 +4,9 @@ node{
         checkout scm
     }
 
-    stage('Update Jira issue'){
-        def transitionInput = [transition: [id: '41']]
-        jiraTransitionIssue idOrKey: 'VB-1', input:transitionInput, site: 'Jira'
-    }
-
-
-//    stage('Release to QA'){
+    stage('Release to QA'){
+        sh "kubectl get services"
 //        sh "kubectl config --kubeconfig=/etc/.kube/config use-context aws_QA"
 //        sh "kubectl replace --kubeconfig=/etc/.kube/config  -f configuration-api-parent/configuration-api/kubernetes/config-api-qa-deployment.yml --record"
-//    }
+    }
 }
