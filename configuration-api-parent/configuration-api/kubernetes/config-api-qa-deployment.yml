@@ -25,4 +25,20 @@ spec:
               ports:
               - containerPort: 1111
 
+---
+
+kind: Service
+metadata:
+    name: config-api-service
+    labels:
+        app: config-api
+        tier: configuration
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 1111
+    selector:
+        app: config-api
+        tier: configuration
+
 
