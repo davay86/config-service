@@ -6,7 +6,6 @@ node{
 
     stage('Release to QA'){
         sh "kubectl config use-context aws_QA"
-        sh "whoami"
-//        sh "kubectl replace --kubeconfig=/etc/.kube/config  -f configuration-api-parent/configuration-api/kubernetes/config-api-qa-deployment.yml --record"
+        sh "kubectl replace -f configuration-api-parent/configuration-api/kubernetes/config-api-qa-deployment.yml --record"
     }
 }
