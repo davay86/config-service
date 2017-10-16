@@ -18,11 +18,29 @@ spec:
         spec:
             containers:
             - name: config-api
-              image: sleepingtalent/configuration-api:1.0.105-RC
+              image: sleepingtalent/configuration-api:1.1.0-RC
               env:
               - name: GIT_CONFIG_URL
                 value: https://github.com/BabcockEMTDevelopment/qa-configuration-properties
               ports:
               - containerPort: 1111
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+    name: config-api-service
+    labels:
+        app: config-api
+        tier: configuration
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 1111
+    selector:
+        app: config-api
+        tier: configuration
+
 
 
