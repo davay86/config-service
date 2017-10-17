@@ -18,7 +18,7 @@ spec:
         spec:
             containers:
             - name: config-api
-              image: sleepingtalent/configuration-api:1.1.9-RC
+              image: sleepingtalent/configuration-api:1.1.10-RC
               env:
               - name: GIT_CONFIG_URL
                 value: https://github.com/BabcockEMTDevelopment/qa-configuration-properties
@@ -30,7 +30,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-    name: config-api-gateway
+    name: config-api-service
     labels:
         app: config-api
         tier: configuration
