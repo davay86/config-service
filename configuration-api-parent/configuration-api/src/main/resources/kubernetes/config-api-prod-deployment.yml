@@ -35,7 +35,7 @@ spec:
                 periodSeconds: 15
               env:
               - name: GIT_CONFIG_URL
-                value: https://github.com/BabcockEMTDevelopment/prod-configuration-properties
+                value: https://github.com/BabcockEMTDevelopment/qa-configuration-properties
               ports:
               - containerPort: 1111
 
@@ -55,5 +55,6 @@ spec:
     selector:
         app: config-api
         tier: configuration
+
 
 
