@@ -3,7 +3,7 @@ kind: Deployment
 metadata: 
     name: config-api
 spec:
-    replicas: 1
+    replicas: 2
     strategy:
       type: RollingUpdate
       rollingUpdate:
@@ -18,7 +18,7 @@ spec:
         spec:
             containers:
             - name: config-api
-              image: sleepingtalent/configuration-api:1.1.14-RC
+              image: sleepingtalent/configuration-api:1.1.15-RC
               readinessProbe:
                 httpGet:
                   path: /config-api/health
