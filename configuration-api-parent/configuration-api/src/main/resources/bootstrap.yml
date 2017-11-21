@@ -21,11 +21,6 @@ spring:
   thymeleaf:
     enabled: false
 
-security:
-  user:
-    name: configUser
-    password: password
-
 ---
 
 spring:
