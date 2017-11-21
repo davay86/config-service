@@ -18,7 +18,7 @@ spec:
         spec:
             containers:
             - name: config-api
-              image: sleepingtalent/configuration-api:1.1.17-RC
+              image: sleepingtalent/configuration-api:1.1.18-RC
               readinessProbe:
                 httpGet:
                   path: /config-api/health
