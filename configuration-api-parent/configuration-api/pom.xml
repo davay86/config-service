@@ -62,7 +62,7 @@
 							<configuration>
 								<images>
 									<image>
-										<name>sleepingtalent/configuration-api:${project.version}-RC</name>
+										<name>emtdevelopment/configuration-api:${project.version}-RC</name>
 										<build>
 											<dockerFileDir>${project.parent.basedir}/configuration-api/target/docker-dist</dockerFileDir>
 										</build>
@@ -82,7 +82,7 @@
 							<configuration>
 								<images>
 									<image>
-										<name>sleepingtalent/configuration-api:latest</name>
+										<name>emtdevelopment/configuration-api:latest</name>
 										<build>
 											<dockerFileDir>${project.parent.basedir}/configuration-api/target/docker-dist</dockerFileDir>
 										</build>
