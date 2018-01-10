@@ -9,6 +9,11 @@ server:
   use-forward-headers: true
   context-path: /config-api
 
+security:
+  user:
+    name: admin
+    password: password
+
 endpoints:
   restart:
     enabled: true
