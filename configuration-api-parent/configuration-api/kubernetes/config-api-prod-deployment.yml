@@ -18,7 +18,7 @@ spec:
         spec:
             containers:
             - name: config-api
-              image: emtdevelopment/configuration-api:1.1.20
+              image: emtdevelopment/configuration-api:1.1.21
               readinessProbe:
                 httpGet:
                   path: /config-api/health
